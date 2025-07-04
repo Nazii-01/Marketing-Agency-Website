@@ -733,6 +733,7 @@ footer {
     margin: 0 auto 1rem;
     font-size: 1.5rem;
     color: #ffffff;
+    
 }
 
 .download-title {
@@ -751,6 +752,16 @@ footer {
     color: #888888;
     font-size: 0.9rem;
 }
+.download-card {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.download-card * {
+    color: inherit;
+    text-decoration: none;
+}
+
 
 @media (max-width: 768px) { 
     .contact-content { 
