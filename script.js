@@ -40,6 +40,7 @@ window.addEventListener('scroll', () => {
   }
 });
 
+
 // Add interactive hover for feature cards
 document.querySelectorAll('.feature-card').forEach(card => {
   card.addEventListener('mouseenter', () => {
@@ -70,3 +71,42 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   })
   .catch(() => alert('Oops! There was a problem submitting your form.'));
 });
+// Dynamic stats counter animation
+        function animateStats() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const finalValue = stat.textContent;
+                const isNumeric = /^\d+/.test(finalValue);
+                
+                if (isNumeric) {
+                    const numValue = parseInt(finalValue);
+                    let current = 0;
+                    const increment = numValue / 50;
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= numValue) {
+                            stat.textContent = finalValue;
+                            clearInterval(timer);
+                        } else {
+                            stat.textContent = Math.floor(current) + finalValue.replace(/^\d+/, '');
+                        }
+                    }, 50);
+                }
+            });
+        }
+
+        // Trigger stats animation when section is visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.problem-stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
