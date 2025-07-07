@@ -237,8 +237,7 @@ nav {
     color: #888;
     font-size: 0.9rem;
 }
-
-/* Features Section */
+/*features section*/
 .features {
     padding: 80px 0;
     background: #0a0a0a;
@@ -248,9 +247,13 @@ nav {
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 3rem;
     margin-top: 3rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
 }
 
 .feature-card {
@@ -258,12 +261,31 @@ nav {
     padding: 2.5rem;
     border-radius: 15px;
     text-align: center;
-    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    /* Initial hidden state */
+    opacity: 0;
+    transform: translateY(80px) scale(0.8);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+/* Staggered animation delays */
+.feature-card:nth-child(1) { transition-delay: 0.1s; }
+.feature-card:nth-child(2) { transition-delay: 0.2s; }
+.feature-card:nth-child(3) { transition-delay: 0.3s; }
+.feature-card:nth-child(4) { transition-delay: 0.4s; }
+.feature-card:nth-child(5) { transition-delay: 0.5s; }
+.feature-card:nth-child(6) { transition-delay: 0.6s; }
+
+/* Visible state - triggered by JavaScript */
+.feature-card.animate-in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Shimmer effect */
 .feature-card::before {
     content: '';
     position: absolute;
@@ -275,14 +297,16 @@ nav {
     transition: left 0.5s ease;
 }
 
-.feature-card:hover::before {
+.feature-card.animate-in::before {
     left: 100%;
 }
 
+/* Hover effects */
 .feature-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-10px) scale(1.02);
     box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
     border-color: rgba(0, 212, 255, 0.3);
+    transition: all 0.3s ease;
 }
 
 .feature-icon {
@@ -297,18 +321,104 @@ nav {
     font-size: 2rem;
     color: #000;
     box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    
+    /* Icon animation */
+    transform: scale(0.5) rotate(-180deg);
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.feature-card.animate-in .feature-icon {
+    transform: scale(1) rotate(0deg);
+    transition-delay: 0.3s;
 }
 
 .feature-title {
     font-size: 1.3rem;
     margin-bottom: 1rem;
     color: #ffffff;
+    
+    /* Title animation */
+    transform: translateX(-30px);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.feature-card.animate-in .feature-title {
+    transform: translateX(0);
+    opacity: 1;
+    transition-delay: 0.4s;
 }
 
 .feature-description {
     color: #b0b0b0;
     line-height: 1.6;
+    
+    /* Description animation */
+    transform: translateX(30px);
+    opacity: 0;
+    transition: all 0.5s ease;
 }
+
+.feature-card.animate-in .feature-description {
+    transform: translateX(0);
+    opacity: 1;
+    transition-delay: 0.5s;
+}
+
+/* Responsive design */
+@media (max-width: 992px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .feature-card {
+        transform: translateY(60px) scale(0.9);
+    }
+}
+
+/* Additional aesthetic touches */
+.features-title {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(45deg, #00d4ff, #00ff88);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.features-title.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Subtle background animation */
+.features::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 20%, rgba(0, 212, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(0, 255, 136, 0.03) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.features.animate-in::before {
+    opacity: 1;
+}
+
 
 /* Platform Support */
 .platforms {

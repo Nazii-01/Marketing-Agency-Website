@@ -12,21 +12,52 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Scroll animations
-const observerOptions = {
+// General scroll animations with unified observer
+const generalObserverOptions = {
   threshold: 0.1,
   rootMargin: '0px 0px -50px 0px'
 };
 
-const observer = new IntersectionObserver((entries) => {
+const generalObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
     }
   });
-}, observerOptions);
+}, generalObserverOptions);
 
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+// Observe elements with fade-in class
+document.querySelectorAll('.fade-in').forEach(el => generalObserver.observe(el));
+
+// Feature cards scroll animation with separate observer
+const featureObserverOptions = {
+    threshold: 0.2,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const featureObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+        }
+    });
+}, featureObserverOptions);
+
+// Observe all feature cards and title
+document.querySelectorAll('.feature-card').forEach(card => {
+    featureObserver.observe(card);
+});
+
+// Check if elements exist before observing
+const featuresTitle = document.querySelector('.features-title');
+const featuresSection = document.querySelector('.features');
+
+if (featuresTitle) {
+    featureObserver.observe(featuresTitle);
+}
+if (featuresSection) {
+    featureObserver.observe(featuresSection);
+}
 
 // Header background change on scroll
 window.addEventListener('scroll', () => {
@@ -40,7 +71,6 @@ window.addEventListener('scroll', () => {
   }
 });
 
-
 // Add interactive hover for feature cards
 document.querySelectorAll('.feature-card').forEach(card => {
   card.addEventListener('mouseenter', () => {
@@ -52,61 +82,65 @@ document.querySelectorAll('.feature-card').forEach(card => {
 });
 
 // Contact form submission confirmation
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
 
-  // Optionally, post to Formspree if action/method are set.
-  fetch(this.action, {
-    method: this.method,
-    body: new FormData(this),
-    headers: { 'Accept': 'application/json' }
-  })
-  .then(response => {
-    if (response.ok) {
-      alert('Thank you! Your message has been sent.');
-      this.reset();
-    } else {
-      alert('Oops! Something went wrong.');
-    }
-  })
-  .catch(() => alert('Oops! There was a problem submitting your form.'));
-});
+        // Optionally, post to Formspree if action/method are set.
+        fetch(this.action, {
+            method: this.method,
+            body: new FormData(this),
+            headers: { 'Accept': 'application/json' }
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Thank you! Your message has been sent.');
+                this.reset();
+            } else {
+                alert('Oops! Something went wrong.');
+            }
+        })
+        .catch(() => alert('Oops! There was a problem submitting your form.'));
+    });
+}
+
 // Dynamic stats counter animation
-        function animateStats() {
-            const statNumbers = document.querySelectorAll('.stat-number');
-            statNumbers.forEach(stat => {
-                const finalValue = stat.textContent;
-                const isNumeric = /^\d+/.test(finalValue);
-                
-                if (isNumeric) {
-                    const numValue = parseInt(finalValue);
-                    let current = 0;
-                    const increment = numValue / 50;
-                    
-                    const timer = setInterval(() => {
-                        current += increment;
-                        if (current >= numValue) {
-                            stat.textContent = finalValue;
-                            clearInterval(timer);
-                        } else {
-                            stat.textContent = Math.floor(current) + finalValue.replace(/^\d+/, '');
-                        }
-                    }, 50);
+function animateStats() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+    statNumbers.forEach(stat => {
+        const finalValue = stat.textContent;
+        const isNumeric = /^\d+/.test(finalValue);
+        
+        if (isNumeric) {
+            const numValue = parseInt(finalValue);
+            let current = 0;
+            const increment = numValue / 50;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= numValue) {
+                    stat.textContent = finalValue;
+                    clearInterval(timer);
+                } else {
+                    stat.textContent = Math.floor(current) + finalValue.replace(/^\d+/, '');
                 }
-            });
+            }, 50);
         }
+    });
+}
 
-        // Trigger stats animation when section is visible
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateStats();
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        const statsSection = document.querySelector('.problem-stats');
-        if (statsSection) {
-            statsObserver.observe(statsSection);
+// Trigger stats animation when section is visible
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateStats();
+            statsObserver.unobserve(entry.target);
         }
+    });
+}, { threshold: 0.5 });
+
+const statsSection = document.querySelector('.problem-stats');
+if (statsSection) {
+    statsObserver.observe(statsSection);
+}
