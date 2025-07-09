@@ -16,7 +16,7 @@ This repository contains the **landing page** for the app.
 Here are some screenshots of the landing page:
 ![Hero Section](images/hero.png)
 ![challenge Section](images/challenge.png)
-![features section](images/benefits.png)
+![features section](images/features.png)
 ![platform Section](images/platform.png)
 ![impact Section](images/impact.png)
 ![download Section](images/download.png)
