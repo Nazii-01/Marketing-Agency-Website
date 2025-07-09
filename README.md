@@ -1,5 +1,5 @@
 Welcome to the **Device Health Optimizer** landing page repository. This project introduces our cross-platform diagnostic tool that helps users monitor, understand, and maintain their device’s health and lifespan.
-🚀 About
+
 Modern computers lose performance over time due to background processes, inefficient resource usage, and thermal stress. **Device Health Optimizer** tackles this by:
 
 - Smart diagnostics (CPU, RAM, Disk, Battery, Temperature)
