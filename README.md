@@ -1,24 +1,38 @@
-Welcome to the **Device Health Optimizer** landing page repository. This project introduces our cross-platform diagnostic tool that helps users monitor, understand, and maintain their device’s health and lifespan.
-🚀 About
-Modern computers lose performance over time due to background processes, inefficient resource usage, and thermal stress. **Device Health Optimizer** tackles this by:
+# 🌐 Velocity Marketing Agency - Student Web Project
 
-- Smart diagnostics (CPU, RAM, Disk, Battery, Temperature)
-- Device lifespan prediction
-- Real-time actionable tips
-- Safe cleanup (rollback option)
-- Idle app suspension suggestions
-- Sustainability focus (reduce e-waste)
+This is a **dummy website project** created as part of my learning journey in web development. It's a fictional digital marketing agency site built using **HTML**, **CSS**, and basic **JavaScript** to demonstrate front-end design skills.
 
-This repository contains the **landing page** for the app.
+---
+
+## 🛠️ Technologies Used
+
+- **HTML5** – For structuring the web content
+- **CSS3** – For styling and layout
+- **JavaScript** – For basic interactivity (animations, effects)
+
+---
+
+## 📄 Project Overview
+
+The website is a single-page layout that includes:
+
+- ✅ A modern **Hero section**
+- ✅ **About** section with animated statistics
+- ✅ **Services** grid showcasing different offerings
+- ✅ **Portfolio / Campaigns** section
+- ✅ **Pricing/Packages** for businesses
+- ✅ A simple **Contact Form**
+- ✅ Fully **responsive layout** using CSS Flex/Grid
+
 
 📸 Screenshots
 
 Here are some screenshots of the landing page:
-![Hero Section](images/hero.png)
-![challenge Section](images/challenge.png)
-![features section](images/features.png)
-![platform Section](images/platform.png)
-![impact Section](images/impact.png)
-![download Section](images/download.png)
-![contact Section](images/contact.png)
+![Hero Section](images/sc1.png)
+![challenge Section](images/sc2.png)
+![features section](images/sc3.png)
+![platform Section](images/sc4.png)
+![impact Section](images/sc5.png)
+![download Section](images/sc6.png)
+![contact Section](images/sc7.png)
 
